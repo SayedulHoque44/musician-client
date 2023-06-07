@@ -14,6 +14,7 @@ export const musicianContext = createContext(null);
 const ContextProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const [loading, setLoading] = useState(true);
+  const [role, setRole] = useState(false);
   const [user, setUser] = useState(null);
   const auth = getAuth(app);
   const Googleprovider = new GoogleAuthProvider();
@@ -48,6 +49,10 @@ const ContextProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      if (currentUser) {
+        // TODO: JWT
+        setRole("instructor");
+      }
     });
 
     return () => unSubscribe();
@@ -64,6 +69,7 @@ const ContextProvider = ({ children }) => {
     loading,
     setLoading,
     user,
+    role,
   };
 
   return (

@@ -1,10 +1,11 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { CiDark, CiLight } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import useGetContext from "../../../Hooks/useGetContext";
 
 const Navbar = () => {
-  const { theme, toggleTheme } = useGetContext();
+  const { theme, toggleTheme, user, logout } = useGetContext();
 
   //
   const navItems = (
@@ -23,6 +24,14 @@ const Navbar = () => {
       </li>
     </>
   );
+  //
+  const hangleLogout = () => {
+    logout()
+      .then(() => {
+        toast.success("Logout");
+      })
+      .catch((err) => toast.error(err.message));
+  };
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -55,15 +64,33 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn " onClick={toggleTheme}>
+          <a className="btn mr-5" onClick={toggleTheme}>
             {theme == "light" ? "dark" : "light"}
             {theme == "light" ? <CiDark /> : <CiLight />}
           </a>
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-            </div>
-          </label>
+          {user ? (
+            <>
+              <button className="btn btn-error" onClick={hangleLogout}>
+                {" "}
+                Logout
+              </button>
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar ">
+                <div className="w-10 rounded-full">
+                  <img
+                    src={
+                      user?.photoURL ||
+                      "https://images.macrumors.com/t/n4CqVR2eujJL-GkUPhv1oao_PmI=/1600x/article-new/2019/04/guest-user-250x250.jpg"
+                    }
+                  />
+                </div>
+              </label>
+            </>
+          ) : (
+            <Link className="btn" to={`login`}>
+              {" "}
+              login
+            </Link>
+          )}
         </div>
       </div>
     </div>

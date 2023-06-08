@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { ImSpinner6 } from "react-icons/im";
+import { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetContext from "../../../Hooks/useGetContext";
 
 const AddClass = () => {
   const { loading, user } = useGetContext();
+  const [addLoading, setAddLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -14,17 +17,36 @@ const AddClass = () => {
   } = useForm();
   //
   const onSubmit = (data) => {
-    console.log(data);
-
-    // filledSets = 0 , status=pending
+    // console.log(data);
+    const { availableSets, imageUrl, price, name } = data;
+    setAddLoading(true);
+    //
     const newClass = {
-      ...data,
+      name,
+      availableSets: parseInt(availableSets),
+      imageUrl,
+      price: parseFloat(price),
       instructorName: user.displayName,
       instructorEmail: user.email,
       filledSets: 0,
       status: "pending",
     };
-    console.log(newClass);
+
+    // insert a class
+    myAxios
+      .post("/classes", newClass)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          toast.success(`${name} Added!`);
+          setAddLoading(false);
+          reset();
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setAddLoading(false);
+      });
   };
   return (
     <div className="py-5">
@@ -116,10 +138,10 @@ const AddClass = () => {
 
           <div className="form-control mt-6">
             <button
-              disabled={loading}
+              disabled={addLoading}
               type="submit"
               className="btn btn-primary">
-              {loading ? <ImSpinner6 /> : "Add Item"}
+              {addLoading ? <ImSpinner6 /> : "Add Item"}
             </button>
           </div>
         </form>

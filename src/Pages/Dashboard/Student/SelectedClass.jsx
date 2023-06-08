@@ -1,10 +1,9 @@
 import React from "react";
 
-const MyClass = () => {
-  const denied = true;
+const SelectedClass = () => {
   return (
     <div>
-      <h1 className="uppercase text-3xl text-center">Myclasses</h1>
+      <h1 className="uppercase text-3xl text-center">Selected Class</h1>
       <div className="overflow-x-auto">
         <table className="table table-xs">
           <thead>
@@ -12,11 +11,7 @@ const MyClass = () => {
               <th>#</th>
               <th>Class Name</th>
               <th>Instructor Name</th>
-
-              <th>Enrolled</th>
-              <th>Status</th>
-              {denied && <td>Feedback</td>}
-              <th>Update Or Delete</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -24,12 +19,9 @@ const MyClass = () => {
               <th>1</th>
               <td>Cy Ganderton</td>
               <td>Quality Control Specialist</td>
-              <td>Canada</td>
-              <td>12/16/2020</td>
-              {denied && <td>Feedback</td>}
               <td>
-                <button className="btn">update</button>
-                <button className="btn">delete</button>
+                <button className="btn btn-error">delete</button>
+                <button className="btn btn-warning ml-3">Pay</button>
               </td>
             </tr>
           </tbody>
@@ -39,4 +31,4 @@ const MyClass = () => {
   );
 };
 
-export default MyClass;
+export default SelectedClass;

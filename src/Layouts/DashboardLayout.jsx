@@ -17,6 +17,37 @@ const DashboardLayout = () => {
         </li>
       </>
     );
+  } else if (role === "admin") {
+    navItems = (
+      <>
+        <li>
+          <Link to={"manageClasses"}>Manage Classes</Link>
+        </li>
+        <li>
+          <Link to={"manageUsers"}>Manage Users</Link>
+        </li>
+      </>
+    );
+  } else if (role === "student") {
+    navItems = (
+      <>
+        <li>
+          <Link to={"selectedClass"}>My Selected Classes</Link>
+        </li>
+        <li>
+          <Link to={"enrolledClass"}>My Enrolled Classes</Link>
+        </li>
+        <li>
+          <Link to={"paymentHistory"}>Payment History</Link>
+        </li>
+      </>
+    );
+  } else {
+    navItems = (
+      <>
+        <li>Loading...</li>
+      </>
+    );
   }
 
   return (

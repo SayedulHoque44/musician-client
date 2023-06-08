@@ -51,7 +51,7 @@ const ContextProvider = ({ children }) => {
       setLoading(false);
       if (currentUser) {
         // TODO: JWT
-        setRole("student");
+        setRole("instructor");
       }
     });
 

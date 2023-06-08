@@ -63,7 +63,7 @@ const ManageClasses = () => {
                   className={`badge badge-ghost badge-sm text-white ${getStatusColor(
                     status
                   )}`}>
-                  Pending
+                  {status}
                 </span>{" "}
               </td>
               <td>

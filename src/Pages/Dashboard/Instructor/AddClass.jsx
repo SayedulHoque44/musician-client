@@ -15,6 +15,16 @@ const AddClass = () => {
   //
   const onSubmit = (data) => {
     console.log(data);
+
+    // filledSets = 0 , status=pending
+    const newClass = {
+      ...data,
+      instructorName: user.displayName,
+      instructorEmail: user.email,
+      filledSets: 0,
+      status: "pending",
+    };
+    console.log(newClass);
   };
   return (
     <div className="py-5">
@@ -59,7 +69,7 @@ const AddClass = () => {
                 readOnly
                 required
                 className="input input-bordered"
-                {...register("instructorName")}
+                // {...register("instructorName")}
               />
             </div>
             <div className="form-control w-1/2">
@@ -73,7 +83,7 @@ const AddClass = () => {
                 readOnly
                 defaultValue={user?.email}
                 className="input input-bordered"
-                {...register("instructorEmail")}
+                // {...register("instructorEmail")}
               />
             </div>
           </div>

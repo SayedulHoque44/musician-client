@@ -1,7 +1,18 @@
 import React from "react";
 
 const MyClass = () => {
-  const denied = true;
+  //
+  let status = "deny";
+  //
+  const getStatusColor = (status) => {
+    if (status === "pending") {
+      return " bg-violet-600";
+    } else if (status === "approved") {
+      return " bg-success ";
+    } else if (status === "deny") {
+      return "bg-error";
+    }
+  };
   return (
     <div>
       <h1 className="uppercase text-3xl text-center">Myclasses</h1>
@@ -15,7 +26,7 @@ const MyClass = () => {
 
               <th>Enrolled</th>
               <th>Status</th>
-              {denied && <td>Feedback</td>}
+              {status === "deny" && <td>Feedback</td>}
               <th>Update Or Delete</th>
             </tr>
           </thead>
@@ -25,11 +36,18 @@ const MyClass = () => {
               <td>Cy Ganderton</td>
               <td>Quality Control Specialist</td>
               <td>Canada</td>
-              <td>12/16/2020</td>
-              {denied && <td>Feedback</td>}
               <td>
-                <button className="btn">update</button>
-                <button className="btn">delete</button>
+                <span
+                  className={`badge badge-ghost badge-sm text-white ${getStatusColor(
+                    status
+                  )}`}>
+                  {status}
+                </span>{" "}
+              </td>
+              {status === "deny" && <td>Give feedback</td>}
+              <td>
+                <button className="btn btn-warning mr-3">update</button>
+                <button className="btn btn-error">delete</button>
               </td>
             </tr>
           </tbody>

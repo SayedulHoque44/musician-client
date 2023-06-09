@@ -96,20 +96,21 @@ const ManageClasses = () => {
                   </span>{" "}
                 </td>
                 <td>
-                  {item.status !== "approved" && (
-                    <button
-                      onClick={() => handleApprove(item)}
-                      className="btn btn-success btn-sm mr-3">
-                      Approve
-                    </button>
+                  {item.status === "pending" && (
+                    <>
+                      <button
+                        onClick={() => handleApprove(item)}
+                        className="btn btn-success btn-sm mr-3">
+                        Approve
+                      </button>
+                      <button
+                        onClick={() => handleDeny(item)}
+                        className="btn btn-error btn-sm">
+                        Deny
+                      </button>
+                    </>
                   )}
-                  {item.status !== "deny" && (
-                    <button
-                      onClick={() => handleDeny(item)}
-                      className="btn btn-error btn-sm">
-                      Deny
-                    </button>
-                  )}
+
                   {/*  */}
                   {/* <dialog id="my_modal_3" className="modal">
                     <form method="dialog" className="modal-box">

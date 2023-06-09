@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetClasses from "../../../Hooks/useGetClasses";
 import useGetContext from "../../../Hooks/useGetContext";
 
@@ -24,7 +26,27 @@ const MyClass = () => {
     navigate("/dashboard/updateClass", { state: item, replace: true });
   };
   //
-  const handleDelete = (item) => {};
+  const handleDelete = (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //
+        myAxios.delete(`/classesInstructor/${item._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            refetch();
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <h1 className="uppercase text-3xl text-center">Myclasses</h1>

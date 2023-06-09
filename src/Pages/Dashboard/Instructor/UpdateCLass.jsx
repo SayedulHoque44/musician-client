@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ImSpinner6 } from "react-icons/im";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetContext from "../../../Hooks/useGetContext";
 const UpdateCLass = () => {
   const { state } = useLocation();
+  const navigate = useNavigate();
   const {
     name,
     availableSets,
@@ -53,7 +54,7 @@ const UpdateCLass = () => {
         if (res.data.modifiedCount > 0) {
           toast.success(`${name} Updated!`);
           setAddLoading(false);
-          reset();
+          navigate("/dashboard/myClass", { replace: true });
         }
       })
       .catch((err) => {

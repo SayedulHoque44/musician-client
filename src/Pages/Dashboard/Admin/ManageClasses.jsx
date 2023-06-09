@@ -38,7 +38,10 @@ const ManageClasses = () => {
   };
   //
   const handleDeny = (item) => {
-    navigate("/dashboard/feedBack", { state: { item }, replace: true });
+    navigate("/dashboard/feedBack", {
+      state: { item },
+      replace: true,
+    });
   };
   return (
     <div>
@@ -110,30 +113,6 @@ const ManageClasses = () => {
                       </button>
                     </>
                   )}
-
-                  {/*  */}
-                  {/* <dialog id="my_modal_3" className="modal">
-                    <form method="dialog" className="modal-box">
-                      <button
-                        htmlFor="my-modal-3"
-                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-                        ✕
-                      </button>
-                      <h3 className="font-bold text-lg text-center">
-                        {item.name} FeedBack !
-                      </h3>
-
-                      <textarea
-                        ref={feedRef}
-                        className="textarea textarea-secondary w-full my-7"
-                        placeholder="Feedback"></textarea>
-                      <button
-                        onClick={() => handleDeny(item)}
-                        className="btn btn-error w-full">
-                        Send
-                      </button>
-                    </form>
-                  </dialog> */}
                 </td>
               </tr>
             ))}

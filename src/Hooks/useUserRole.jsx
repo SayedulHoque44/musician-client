@@ -9,7 +9,7 @@ const useUserRole = () => {
     enabled: !loading,
     queryFn: async () => {
       // TODO:Token
-      const response = await myAxios.get(`/users/${user?.email}`);
+      const response = await myAxios.get(`/usersRole/${user?.email}`);
       return response.data.role;
     },
   });

@@ -50,7 +50,7 @@ const UpdateCLass = () => {
     myAxios
       .patch(`/classesInstructor/${_id}`, newClass)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.modifiedCount > 0) {
           toast.success(`${name} Updated!`);
           setAddLoading(false);

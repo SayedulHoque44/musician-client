@@ -2,8 +2,9 @@ import React from "react";
 
 const Classes = () => {
   return (
-    <div>
-      <h1>Classes</h1>
+    <div className="py-5">
+      <h1 className="uppercase text-3xl text-center">Manage Classes</h1>
+      <div></div>
     </div>
   );
 };

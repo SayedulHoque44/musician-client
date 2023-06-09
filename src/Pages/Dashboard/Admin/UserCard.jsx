@@ -1,15 +1,35 @@
 import React from "react";
+import { toast } from "react-hot-toast";
+import { myAxios } from "../../../Hooks/useAxiosSecure";
 
-const UserCard = ({ user }) => {
-  const { name, image, email, role } = user;
-
+const UserCard = ({ user, refetch }) => {
+  const { Name, image, email, role, _id } = user;
+  // console.log(user);
   //
   const handleInstructor = (user) => {
-    console.log(user);
+    const role = "instructor";
+    myAxios
+      .patch(`/userRoleChange/${_id}`, { role })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          toast.success(`${Name} Is Now Insctructor`);
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
   //
   const handleAdmin = (user) => {
-    console.log(user);
+    const role = "admin";
+    myAxios
+      .patch(`/userRoleChange/${_id}`, { role })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          toast.success(`${Name} Is Now Insctructor`);
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   //
@@ -20,7 +40,7 @@ const UserCard = ({ user }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">
-          {name}
+          {Name}
           <div className="badge badge-secondary font-semibold">{role}</div>
         </h2>
         <p>{email}</p>

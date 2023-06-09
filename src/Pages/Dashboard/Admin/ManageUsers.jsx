@@ -10,7 +10,7 @@ const ManageUsers = () => {
       <h1 className="uppercase text-3xl text-center">Manage Users</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-7 py-7">
         {Users.map((user) => (
-          <UserCard key={user._id} user={user} />
+          <UserCard key={user._id} user={user} refetch={refetch} />
         ))}
       </div>
     </div>

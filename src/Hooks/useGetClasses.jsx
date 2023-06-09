@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { myAxios } from "./useAxiosSecure";
 import useGetContext from "./useGetContext";
 
-const useGetClasses = (email) => {
+const useGetClasses = (email, status) => {
   const { user, loading } = useGetContext();
 
   //
@@ -16,6 +16,9 @@ const useGetClasses = (email) => {
     queryFn: async () => {
       if (email) {
         const response = await myAxios.get(`/classes/${email}`);
+        return response.data;
+      } else if (status) {
+        const response = await myAxios.get(`/classes?status=${status}`);
         return response.data;
       } else {
         const response = await myAxios.get("/classes");

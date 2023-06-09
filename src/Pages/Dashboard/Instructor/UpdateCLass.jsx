@@ -2,10 +2,24 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ImSpinner6 } from "react-icons/im";
+import { useLocation } from "react-router-dom";
 import { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetContext from "../../../Hooks/useGetContext";
-
-const AddClass = () => {
+const UpdateCLass = () => {
+  const { state } = useLocation();
+  const {
+    name,
+    availableSets,
+    imageUrl,
+    price,
+    instructorName,
+    instructorEmail,
+    enrolled,
+    status,
+    _id,
+  } = state;
+  // console.log(name);
+  //
   const { loading, user } = useGetContext();
   const [addLoading, setAddLoading] = useState(false);
   const {
@@ -17,7 +31,6 @@ const AddClass = () => {
   } = useForm();
   //
   const onSubmit = (data) => {
-    // console.log(data);
     const { availableSets, imageUrl, price, name } = data;
     setAddLoading(true);
     //
@@ -31,14 +44,14 @@ const AddClass = () => {
       enrolled: 0,
       status: "pending",
     };
-
+    // console.log(newClass);
     // insert a class
     myAxios
-      .post("/classes", newClass)
+      .patch(`/classesInstructor/${_id}`, newClass)
       .then((res) => {
         console.log(res.data);
-        if (res.data.insertedId) {
-          toast.success(`${name} Added!`);
+        if (res.data.modifiedCount > 0) {
+          toast.success(`${name} Updated!`);
           setAddLoading(false);
           reset();
         }
@@ -48,9 +61,10 @@ const AddClass = () => {
         setAddLoading(false);
       });
   };
+  //
   return (
     <div className="py-5">
-      <h1 className="uppercase text-3xl text-center">Add a class</h1>
+      <h1 className="uppercase text-3xl text-center"> Update {name} class</h1>
       <div className="card flex-shrink-0   shadow-2xl bg-base-100  lg:mr-10">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <div className="flex gap-3">
@@ -61,6 +75,7 @@ const AddClass = () => {
               <input
                 type="text"
                 placeholder="Class name"
+                defaultValue={name}
                 required
                 className="input input-bordered"
                 {...register("name")}
@@ -73,6 +88,7 @@ const AddClass = () => {
               <input
                 type="text"
                 placeholder="Image Url"
+                defaultValue={imageUrl}
                 required
                 className="input input-bordered"
                 {...register("imageUrl")}
@@ -117,6 +133,7 @@ const AddClass = () => {
               <input
                 type="text"
                 placeholder="Available Sets"
+                defaultValue={availableSets}
                 required
                 className="input input-bordered"
                 {...register("availableSets")}
@@ -129,6 +146,7 @@ const AddClass = () => {
               <input
                 type="text"
                 placeholder="Price"
+                defaultValue={price}
                 required
                 className="input input-bordered"
                 {...register("price")}
@@ -150,4 +168,4 @@ const AddClass = () => {
   );
 };
 
-export default AddClass;
+export default UpdateCLass;

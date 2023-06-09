@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import useGetContext from "../Hooks/useGetContext";
+import useUserRole from "../Hooks/useUserRole";
 
 const DashboardLayout = () => {
-  const { role } = useGetContext();
-  // console.log(role);
+  const [userRole, userRoleoading] = useUserRole();
+
   let navItems;
-  if (role === "instructor") {
+  if (userRole === "instructor") {
     navItems = (
       <>
         <li>
@@ -17,7 +17,7 @@ const DashboardLayout = () => {
         </li>
       </>
     );
-  } else if (role === "admin") {
+  } else if (userRole === "admin") {
     navItems = (
       <>
         <li>
@@ -28,7 +28,7 @@ const DashboardLayout = () => {
         </li>
       </>
     );
-  } else if (role === "student") {
+  } else if (userRole === "student") {
     navItems = (
       <>
         <li>
@@ -67,6 +67,9 @@ const DashboardLayout = () => {
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
           {/* Sidebar content here */}
           {navItems}
+          <li>
+            <Link to={"/"}>Home</Link>
+          </li>
         </ul>
       </div>
     </div>

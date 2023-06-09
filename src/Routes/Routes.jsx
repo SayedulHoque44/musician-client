@@ -2,10 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layouts/DashboardLayout";
 import MainLayout from "../Layouts/MainLayout";
 import Classes from "../Pages/Classes/Classes";
+import Feedback from "../Pages/Dashboard/Admin/Feedback";
 import ManageClasses from "../Pages/Dashboard/Admin/ManageClasses";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import AddClass from "../Pages/Dashboard/Instructor/AddClass";
 import MyClass from "../Pages/Dashboard/Instructor/MyClass";
+import UpdateCLass from "../Pages/Dashboard/Instructor/UpdateCLass";
 import EnrolledClass from "../Pages/Dashboard/Student/EnrolledClass";
 import PaymentHistory from "../Pages/Dashboard/Student/PaymentHistory";
 import SelectedClass from "../Pages/Dashboard/Student/SelectedClass";
@@ -52,6 +54,14 @@ export const routes = createBrowserRouter([
       {
         path: "myClass",
         element: <MyClass />,
+      },
+      {
+        path: "feedBack",
+        element: <Feedback />,
+      },
+      {
+        path: "updateClass",
+        element: <UpdateCLass />,
       },
       {
         path: "manageClasses",

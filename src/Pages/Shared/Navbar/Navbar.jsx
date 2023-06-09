@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useGetContext from "../../../Hooks/useGetContext";
 
 const Navbar = () => {
-  const { theme, toggleTheme, user, logout } = useGetContext();
+  const { theme, toggleTheme, user, logout, loading } = useGetContext();
 
   //
   const navItems = (

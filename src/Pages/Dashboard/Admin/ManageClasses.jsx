@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useRef } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { myAxios } from "../../../Hooks/useAxiosSecure";
+import useGetClasses from "../../../Hooks/useGetClasses";
 
+export const remainSets = (sets, enrolled) => {
+  return sets - enrolled;
+};
 const ManageClasses = () => {
-  let status = "pending";
+  const [classes, refetch, isClassesLoading] = useGetClasses();
+  const feedRef = useRef(null);
+  const navigate = useNavigate();
+
+  //
+
+  // console.log(classes);
   const getStatusColor = (status) => {
     if (status === "pending") {
       return " bg-violet-600";
@@ -10,6 +23,22 @@ const ManageClasses = () => {
     } else if (status === "deny") {
       return "bg-error";
     }
+  };
+  //
+  const handleApprove = (item) => {
+    myAxios
+      .patch(`classes/${item._id}?status=approved`)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          toast.success(`${item.name} Approved!`);
+          refetch();
+        }
+      })
+      .catch((err) => toast.error(err.message));
+  };
+  //
+  const handleDeny = (item) => {
+    navigate("/dashboard/feedBack", { state: { item }, replace: true });
   };
   return (
     <div>
@@ -30,47 +59,83 @@ const ManageClasses = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            <tr>
-              <th>1</th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {classes.map((item, index) => (
+              <tr key={item._id}>
+                <th>{index + 1}</th>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={item.imageUrl}
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{item.name}</div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Instructor Name
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Instructor Email
-                </span>
-              </td>
-              <td>sets</td>
-              <td className="text-right">$price</td>
-              <td>
-                {" "}
-                <span
-                  className={`badge badge-ghost badge-sm text-white ${getStatusColor(
-                    status
-                  )}`}>
-                  {status}
-                </span>{" "}
-              </td>
-              <td>
-                <button className="btn btn-success btn-sm mr-3">Approve</button>
-                <button className="btn btn-error btn-sm">Deny</button>
-              </td>
-            </tr>
+                </td>
+                <td>
+                  {item.instructorName}
+                  <br />
+                  <span className="badge badge-ghost badge-sm">
+                    {item.instructorEmail}
+                  </span>
+                </td>
+                <td> {remainSets(item.availableSets, item.enrolled)}</td>
+                <td className="text-right">${item.price}</td>
+                <td>
+                  {" "}
+                  <span
+                    className={`badge badge-ghost badge-sm text-white ${getStatusColor(
+                      item.status
+                    )}`}>
+                    {item.status}
+                  </span>{" "}
+                </td>
+                <td>
+                  {item.status !== "approved" && (
+                    <button
+                      onClick={() => handleApprove(item)}
+                      className="btn btn-success btn-sm mr-3">
+                      Approve
+                    </button>
+                  )}
+                  {item.status !== "deny" && (
+                    <button
+                      onClick={() => handleDeny(item)}
+                      className="btn btn-error btn-sm">
+                      Deny
+                    </button>
+                  )}
+                  {/*  */}
+                  {/* <dialog id="my_modal_3" className="modal">
+                    <form method="dialog" className="modal-box">
+                      <button
+                        htmlFor="my-modal-3"
+                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                        ✕
+                      </button>
+                      <h3 className="font-bold text-lg text-center">
+                        {item.name} FeedBack !
+                      </h3>
+
+                      <textarea
+                        ref={feedRef}
+                        className="textarea textarea-secondary w-full my-7"
+                        placeholder="Feedback"></textarea>
+                      <button
+                        onClick={() => handleDeny(item)}
+                        className="btn btn-error w-full">
+                        Send
+                      </button>
+                    </form>
+                  </dialog> */}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

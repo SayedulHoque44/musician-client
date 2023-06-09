@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "react-hot-toast";
@@ -7,11 +8,16 @@ import ContextProvider from "./Provider/ContextProvider.jsx";
 import { routes } from "./Routes/Routes.jsx";
 import "./index.css";
 
+// Create a client
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <ContextProvider>
     <Container>
-      <RouterProvider router={routes} />
-      <Toaster />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={routes} />
+        <Toaster />
+      </QueryClientProvider>
     </Container>
   </ContextProvider>
 );

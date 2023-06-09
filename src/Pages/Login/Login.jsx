@@ -6,6 +6,7 @@ import { ImSpinner6 } from "react-icons/im";
 import { Link } from "react-router-dom";
 
 import { toast } from "react-hot-toast";
+import { myAxios } from "../../Hooks/useAxiosSecure";
 import useGetContext from "../../Hooks/useGetContext";
 import loginImg from "../../assets/icon/undraw_secure_login_pdn4.svg";
 const Login = () => {
@@ -42,7 +43,23 @@ const Login = () => {
       .then((res) => {
         const currentUser = res.user;
         // console.log(currentUser);
-        toast.success(`${currentUser.displayName} Logged!`);
+        // send user to mongodb usersCollection
+        const newUser = {
+          email: currentUser.email,
+          role: "student",
+          Name: currentUser.displayName,
+          image: currentUser.photoURL,
+        };
+        myAxios
+          .post("/users", newUser)
+          .then((res) => {
+            if (res.data.exits) {
+              toast.success(`Welcome Back ${currentUser.displayName} !`);
+            } else {
+              toast.success(`Welcome  ${currentUser.displayName}`);
+            }
+          })
+          .catch((err) => toast.error(err.message));
         setLoading(false);
       })
       .catch((err) => {

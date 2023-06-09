@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ImSpinner6 } from "react-icons/im";
 import { Link } from "react-router-dom";
+import { myAxios } from "../../Hooks/useAxiosSecure";
 import useGetContext from "../../Hooks/useGetContext";
 import registerImg from "../../assets/icon/undraw_mobile_login_re_9ntv.svg";
 const Register = () => {
@@ -23,17 +24,36 @@ const Register = () => {
       return toast.error("Password Not Matched!");
     }
 
-    //
+    //createUser
     createUser(data.email, data.password)
       .then((res) => {
         const currentUser = res.user;
-        //
+
+        //updateProfile
         updateProfile(currentUser, {
           displayName: data.name,
           photoURL: data.PhotoUrl,
         }).then((res) => {
           setLoading(false);
-          toast.success(`${currentUser.displayName} Registered!`);
+
+          // send user to mongodb usersCollection
+          const newUser = {
+            email: currentUser.email,
+            role: "student",
+            Name: currentUser.displayName,
+            image: currentUser.photoURL,
+          };
+          myAxios
+            .post("/users", newUser)
+            .then((res) => {
+              if (res.data.exits) {
+                toast.success(`Welcome Back ${data.email} !`);
+              } else {
+                toast.success(`Welcome  ${data.email}`);
+              }
+            })
+            .catch((err) => toast.error(err.message));
+
           reset();
         });
       })

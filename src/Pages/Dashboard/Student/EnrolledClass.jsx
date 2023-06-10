@@ -5,8 +5,8 @@ import usePaidClasses from "../../../Hooks/usePaidClasses";
 const EnrolledClass = () => {
   const { user } = useGetContext();
   const [Paidclasses, refetch, isClassLoading] = usePaidClasses(user?.email);
-  // console.log(Paidclasses);
-  let status = "paid";
+  console.log(Paidclasses);
+
   return (
     <div>
       <h1 className="uppercase text-3xl text-center">Enrolled Classes</h1>
@@ -24,42 +24,36 @@ const EnrolledClass = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {}
-            <tr>
-              <th>1</th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src="/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component"
-                      />
+            {Paidclasses.map((item, index) => (
+              <tr key={item._id}>
+                <th>{index + 1}</th>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={item.imageUrl}
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{item.name}</div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-bold">Hart Hagerty</div>
-                    <div className="text-sm opacity-50">United States</div>
-                  </div>
-                </div>
-              </td>
-              <td>
-                Instructor Name
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  Instructor Email
-                </span>
-              </td>
+                </td>
+                <td>{item.instructorName}</td>
 
-              <td className="text-right">$price</td>
-              <td>
-                {" "}
-                <span
-                  className={`badge badge-ghost badge-sm text-white bg-success`}>
-                  {status === "paid" && "Paid"}
-                </span>{" "}
-              </td>
-            </tr>
+                <td className="text-right">${item.price}</td>
+                <td>
+                  {" "}
+                  <span
+                    className={`badge badge-ghost badge-sm text-white bg-success`}>
+                    {item.status === "paid" && "Paid"}
+                  </span>{" "}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

@@ -1,6 +1,11 @@
 import React from "react";
+import useGetContext from "../../../Hooks/useGetContext";
+import usePaidClasses from "../../../Hooks/usePaidClasses";
 
 const EnrolledClass = () => {
+  const { user } = useGetContext();
+  const [Paidclasses, refetch, isClassLoading] = usePaidClasses(user?.email);
+  // console.log(Paidclasses);
   let status = "paid";
   return (
     <div>
@@ -13,13 +18,13 @@ const EnrolledClass = () => {
               <th>#</th>
               <th>Class</th>
               <th>Instructor Name & Email</th>
-
               <th>Price</th>
               <th>Status</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
+            {}
             <tr>
               <th>1</th>
               <td>

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { myAxios } from "../../Hooks/useAxiosSecure";
 import useGetContext from "../../Hooks/useGetContext";
 import useGetEnroll from "../../Hooks/useGetEnroll";
+import usePaidClasses from "../../Hooks/usePaidClasses";
 import useUserRole from "../../Hooks/useUserRole";
 
 const ClassCard = ({ card }) => {
@@ -13,7 +14,8 @@ const ClassCard = ({ card }) => {
   const [userRole, userRoleoading] = useUserRole();
   const [loading, setLoading] = useState(false);
   const [enrolledClasses, isLoading, refetch] = useGetEnroll(user?.email);
-  console.log(enrolledClasses);
+  const [Paidclasses, , isPaidLoading] = usePaidClasses(user?.email);
+  // console.log(Paidclasses);
   const {
     availableSets,
     enrolled,
@@ -26,7 +28,16 @@ const ClassCard = ({ card }) => {
     _id,
   } = card;
   //
-
+  let proccesClass = false;
+  if (enrolledClasses || Paidclasses) {
+    if (enrolledClasses.find((item) => item.classId === _id)) {
+      proccesClass = "selected";
+    } else if (Paidclasses.find((item) => item.classId === _id)) {
+      proccesClass = "paid";
+    } else {
+      proccesClass = false;
+    }
+  }
   //
   const handleEnroll = () => {
     setLoading(true);
@@ -45,7 +56,7 @@ const ClassCard = ({ card }) => {
         .then((res) => {
           setLoading(false);
           if (res.data.insertedId) {
-            toast.success(`Enrolled Successfull!`);
+            toast.success(`Selected!`);
             refetch();
           } else {
             toast.error(`Somthing Wrong!`);
@@ -86,11 +97,17 @@ const ClassCard = ({ card }) => {
         {/* Ata tkn kombe jkn payment krbe */}
         <p className="font-semibold">Available Sets : {availableSets}</p>
         <div className="card-actions justify-end">
-          {enrolledClasses.find((item) => item.classId === _id) ? (
+          {proccesClass === "selected" && (
             <button className="btn btn-primary" disabled>
+              Selected
+            </button>
+          )}
+          {proccesClass === "paid" && (
+            <button className="btn btn-success" disabled>
               Enrolled
             </button>
-          ) : (
+          )}
+          {proccesClass === false && (
             <button
               className="btn btn-primary"
               disabled={
@@ -99,7 +116,7 @@ const ClassCard = ({ card }) => {
                   : true
               }
               onClick={handleEnroll}>
-              Enroll
+              Select
             </button>
           )}
         </div>

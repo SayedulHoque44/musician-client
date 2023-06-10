@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { myAxios } from "./useAxiosSecure";
 import useGetContext from "./useGetContext";
 
@@ -8,13 +9,14 @@ const usePaidClasses = (email) => {
   const {
     data: Paidclasses = [],
     refetch,
-    isLoading: isClassLoading,
+    isLoading: isPaidLoading,
   } = useQuery({
-    queryKey: ["classes"],
+    queryKey: ["PaidClass"],
     enabled: !loading,
     queryFn: async () => {
       if (email) {
         const response = await myAxios.get(`/payments/${email}`);
+
         return response.data;
       } else {
         const response = await myAxios.get("/payments");
@@ -23,7 +25,7 @@ const usePaidClasses = (email) => {
     },
   });
 
-  return [Paidclasses, refetch, isClassLoading];
+  return [Paidclasses, refetch, isPaidLoading];
 };
 
 export default usePaidClasses;

@@ -100,11 +100,17 @@ const CheckoutForm = ({ ClassPrice, instantEnrollClass }) => {
         if (res.data.insertedId) {
           Swal.fire(`Payment Success! ID : ${paymentIntent.id}`);
           navigate("/dashboard/enrolledClass");
-          //
+          // remove from selected
           myAxios
             .delete(`/enroll/${instantEnrollClass._id}`)
             .then()
             .catch((err) => toast.error("Somting Wrong"));
+
+          // update sets
+          myAxios
+            .patch(`/classSets/${instantEnrollClass.classId}`)
+            .then()
+            .catch((err) => toast.error(err.message));
         }
       });
       //

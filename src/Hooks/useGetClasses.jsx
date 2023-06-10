@@ -18,10 +18,10 @@ const useGetClasses = (email, status) => {
         const response = await myAxios.get(`/classes/${email}`);
         return response.data;
       } else if (status) {
-        const response = await myAxios.get(`/classes?status=${status}`);
+        const response = await myAxios.get(`/StatusClasses/${status}`);
         return response.data;
       } else {
-        const response = await myAxios.get("/classes");
+        const response = await myAxios.get("/AllClasses");
         return response.data;
       }
     },

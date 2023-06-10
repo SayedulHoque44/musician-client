@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import useGetContext from "../../../Hooks/useGetContext";
 import usePaidClasses from "../../../Hooks/usePaidClasses";
 
 const PaymentHistory = () => {
   const { user } = useGetContext();
-  const [Paidclasses, refetch, isClassLoading] = usePaidClasses(user?.email);
-  console.log(Paidclasses);
+  const [sort, setSort] = useState(-1);
+  const [Paidclasses, refetch, isClassLoading] = usePaidClasses(
+    user?.email,
+    sort
+  );
+  // console.log(Paidclasses);
+  //
+
+  //
+  const handleSort = () => {
+    setSort(sort === 1 ? -1 : 1);
+    refetch();
+  };
+  // console.log(sort);
   return (
     <div>
       <h1 className="uppercase text-3xl text-center">payment History</h1>
+      <button className="btn btn-primary test" onClick={handleSort}>
+        {sort === -1 ? "Accending" : "Deaccending"} By Date
+      </button>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

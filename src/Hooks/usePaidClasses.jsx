@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { myAxios } from "./useAxiosSecure";
 import useGetContext from "./useGetContext";
 
-const usePaidClasses = (email) => {
+const usePaidClasses = (email, sort) => {
   const { user, loading } = useGetContext();
 
   //
@@ -11,11 +11,17 @@ const usePaidClasses = (email) => {
     refetch,
     isLoading: isPaidLoading,
   } = useQuery({
-    queryKey: ["PaidClass", email],
+    queryKey: ["PaidClass"],
     enabled: !loading && user?.email ? true : false,
     queryFn: async () => {
-      if (email) {
+      if (email && !sort) {
         const response = await myAxios.get(`/payments/${email}`);
+
+        return response.data;
+      } else if (email && sort) {
+        const response = await myAxios.get(
+          `/paymentsSort?email=${email}&sort=${sort}`
+        );
 
         return response.data;
       } else {

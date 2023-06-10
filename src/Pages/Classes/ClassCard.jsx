@@ -38,7 +38,7 @@ const ClassCard = ({ card }) => {
       proccesClass = false;
     }
   }
-  // console.log(proccesClass);
+  console.log(proccesClass);
   //
   const handleEnroll = () => {
     setLoading(true);
@@ -108,7 +108,7 @@ const ClassCard = ({ card }) => {
               Enrolled
             </button>
           )}
-          {proccesClass === false && user ? (
+          {proccesClass === false && (
             <button
               className="btn btn-primary"
               disabled={
@@ -116,13 +116,6 @@ const ClassCard = ({ card }) => {
                   ? false
                   : true
               }
-              onClick={handleEnroll}>
-              Select
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary"
-              disabled={true}
               onClick={handleEnroll}>
               Select
             </button>

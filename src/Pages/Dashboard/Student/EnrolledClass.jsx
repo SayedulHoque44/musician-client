@@ -17,7 +17,7 @@ const EnrolledClass = () => {
             <tr>
               <th>#</th>
               <th>Class</th>
-              <th>Instructor Name & Email</th>
+              <th>Instructor Name </th>
               <th>Price</th>
               <th>Status</th>
             </tr>

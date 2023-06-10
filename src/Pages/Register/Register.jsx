@@ -47,9 +47,9 @@ const Register = () => {
             .post("/users", newUser)
             .then((res) => {
               if (res.data.exits) {
-                toast.success(`Welcome Back ${data.email} !`);
+                toast.success(`Welcome Back ${currentUser.displayName} !`);
               } else {
-                toast.success(`Welcome  ${data.email}`);
+                toast.success(`Welcome  ${currentUser.displayName}`);
               }
             })
             .catch((err) => toast.error(err.message));

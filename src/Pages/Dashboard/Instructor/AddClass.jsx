@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ImSpinner6 } from "react-icons/im";
+import { useNavigate } from "react-router-dom";
 import { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetContext from "../../../Hooks/useGetContext";
 
 const AddClass = () => {
   const { loading, user } = useGetContext();
+  const navigate = useNavigate();
   const [addLoading, setAddLoading] = useState(false);
   const {
     register,
@@ -18,6 +20,7 @@ const AddClass = () => {
   //
   const onSubmit = (data) => {
     // console.log(data);
+
     const { availableSets, imageUrl, price, name } = data;
     setAddLoading(true);
     //
@@ -41,6 +44,7 @@ const AddClass = () => {
           toast.success(`${name} Added!`);
           setAddLoading(false);
           reset();
+          navigate("/dashboard/myClass");
         }
       })
       .catch((err) => {

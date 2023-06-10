@@ -65,7 +65,10 @@ const UpdateCLass = () => {
   //
   return (
     <div className="py-5">
-      <h1 className="uppercase text-3xl text-center"> Update {name} class</h1>
+      <h1 className="uppercase text-3xl text-center">
+        {" "}
+        Update <span className="text-yellow-500">{name}</span> class
+      </h1>
       <div className="card flex-shrink-0   shadow-2xl bg-base-100  lg:mr-10">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <div className="flex gap-3">
@@ -160,7 +163,7 @@ const UpdateCLass = () => {
               disabled={addLoading}
               type="submit"
               className="btn btn-primary">
-              {addLoading ? <ImSpinner6 /> : "Add Item"}
+              {addLoading ? <ImSpinner6 /> : "Update Item"}
             </button>
           </div>
         </form>

@@ -11,8 +11,8 @@ const usePaidClasses = (email) => {
     refetch,
     isLoading: isPaidLoading,
   } = useQuery({
-    queryKey: ["PaidClass"],
-    enabled: !loading,
+    queryKey: ["PaidClass", email],
+    enabled: !loading && user?.email ? true : false,
     queryFn: async () => {
       if (email) {
         const response = await myAxios.get(`/payments/${email}`);
@@ -20,6 +20,7 @@ const usePaidClasses = (email) => {
         return response.data;
       } else {
         const response = await myAxios.get("/payments");
+        // console.log(response);
         return response.data;
       }
     },

@@ -4,7 +4,11 @@ import useGetContext from "./useGetContext";
 
 const useGetEnroll = (email) => {
   const { loading } = useGetContext();
-  const { data: enrolledClasses = [], isLoading } = useQuery({
+  const {
+    data: enrolledClasses = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["enrolled"],
     enabled: !loading,
     queryFn: async () => {
@@ -15,7 +19,7 @@ const useGetEnroll = (email) => {
     },
   });
 
-  return [enrolledClasses, isLoading];
+  return [enrolledClasses, isLoading, refetch];
 };
 
 export default useGetEnroll;

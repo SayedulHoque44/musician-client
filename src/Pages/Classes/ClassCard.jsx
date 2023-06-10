@@ -12,7 +12,7 @@ const ClassCard = ({ card }) => {
   const navigate = useNavigate();
   const [userRole, userRoleoading] = useUserRole();
   const [loading, setLoading] = useState(false);
-  const [enrolledClasses, isLoading] = useGetEnroll(user?.email);
+  const [enrolledClasses, isLoading, refetch] = useGetEnroll(user?.email);
   console.log(enrolledClasses);
   const {
     availableSets,
@@ -46,6 +46,7 @@ const ClassCard = ({ card }) => {
           setLoading(false);
           if (res.data.insertedId) {
             toast.success(`Enrolled Successfull!`);
+            refetch();
           } else {
             toast.error(`Somthing Wrong!`);
           }

@@ -1,5 +1,6 @@
 import React from "react";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetContext from "../../../Hooks/useGetContext";
@@ -65,7 +66,11 @@ const SelectedClass = () => {
                     onClick={() => handleDelete(item)}>
                     delete
                   </button>
-                  <button className="btn btn-warning ml-3">Pay</button>
+                  <Link
+                    to={`/dashboard/payment/${item._id}`}
+                    className="btn btn-warning ml-3">
+                    Pay
+                  </Link>
                 </td>
               </tr>
             ))}

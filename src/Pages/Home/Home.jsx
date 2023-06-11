@@ -1,11 +1,14 @@
 import React from "react";
 import Bannar from "./Bannar/Bannar";
+import PopularClass from "./PopularClass/PopularClass";
+import PopularInstructor from "./PopularInstructor/PopularInstructor";
 
 const Home = () => {
   return (
     <div>
-      <h2>Home</h2>
       <Bannar />
+      <PopularClass />
+      <PopularInstructor />
     </div>
   );
 };

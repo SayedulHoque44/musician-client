@@ -79,7 +79,9 @@ const Navbar = () => {
                 {" "}
                 Logout
               </button>
-              <label tabIndex={0} className="btn btn-ghost btn-circle avatar ">
+              <label
+                tabIndex={0}
+                className="btn btn-ghost btn-circle avatar m-0">
                 <div className="w-10 rounded-full">
                   <img
                     src={

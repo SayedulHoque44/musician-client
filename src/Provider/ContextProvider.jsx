@@ -62,7 +62,6 @@ const ContextProvider = ({ children }) => {
     toggleTheme,
     createUser,
     logIn,
-
     logout,
     googleIn,
     loading,

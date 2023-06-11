@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { ImSpinner6 } from "react-icons/im";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { toast } from "react-hot-toast";
 import { myAxios } from "../../Hooks/useAxiosSecure";
@@ -11,6 +11,7 @@ import useGetContext from "../../Hooks/useGetContext";
 import loginImg from "../../assets/icon/undraw_secure_login_pdn4.svg";
 const Login = () => {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
   const { googleIn, logIn, loading, setLoading } = useGetContext();
   // console.log(loading);
   const {
@@ -30,6 +31,7 @@ const Login = () => {
         toast.success(`${currentUser.displayName} Logged!`);
         setLoading(false);
         reset();
+        navigate("/");
       })
       .catch((err) => {
         toast.error(err.message);
@@ -55,8 +57,10 @@ const Login = () => {
           .then((res) => {
             if (res.data.exits) {
               toast.success(`Welcome Back ${currentUser.displayName} !`);
+              navigate("/");
             } else {
               toast.success(`Welcome  ${currentUser.displayName}`);
+              navigate("/");
             }
           })
           .catch((err) => toast.error(err.message));

@@ -94,12 +94,19 @@ const ClassCard = ({ card }) => {
         </div>
         <h2 className="card-title">{name}</h2>
         <p>
-          <span className="font-semibold">Instructor</span> <br />
-          Name : {instructorName} <br />
-          Email : {instructorEmail}
+          <span className="font-semibold">Instructor : </span> <br />
+          {instructorName} <br />
+          {instructorEmail}
         </p>
         {/* Ata tkn kombe jkn payment krbe */}
-        <p className="font-semibold">Available Sets : {availableSets}</p>
+
+        <p className="font-semibold">
+          {availableSets === 0 ? (
+            <span className="text-warning">Sets Are Full..!</span>
+          ) : (
+            <span>Available Sets : {availableSets}</span>
+          )}
+        </p>
         <div className="card-actions justify-end">
           {proccesClass === "selected" && (
             <button className="btn btn-primary" disabled>
@@ -107,9 +114,7 @@ const ClassCard = ({ card }) => {
             </button>
           )}
           {proccesClass === "paid" && (
-            <button className="btn btn-success" disabled>
-              Enrolled
-            </button>
+            <button className="btn bg-violet-600 disabled">Enrolled</button>
           )}
           {proccesClass === false && (
             <button

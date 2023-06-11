@@ -2,13 +2,15 @@ import { updateProfile } from "firebase/auth";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 import { ImSpinner6 } from "react-icons/im";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { myAxios } from "../../Hooks/useAxiosSecure";
 import useGetContext from "../../Hooks/useGetContext";
 import registerImg from "../../assets/icon/undraw_mobile_login_re_9ntv.svg";
 const Register = () => {
-  const { createUser, loading, setLoading } = useGetContext();
+  const navigate = useNavigate();
+  const { createUser, loading, setLoading, googleIn } = useGetContext();
   //
   const {
     register,
@@ -48,14 +50,48 @@ const Register = () => {
             .then((res) => {
               if (res.data.exits) {
                 toast.success(`Welcome Back ${currentUser.displayName} !`);
+                navigate("/");
               } else {
                 toast.success(`Welcome  ${currentUser.displayName}`);
+                navigate("/");
               }
             })
             .catch((err) => toast.error(err.message));
 
           reset();
         });
+      })
+      .catch((err) => {
+        toast.error(err.message);
+        setLoading(false);
+      });
+  };
+  // googleIn
+  const handleGoogleIn = () => {
+    googleIn()
+      .then((res) => {
+        const currentUser = res.user;
+        // console.log(currentUser);
+        // send user to mongodb usersCollection
+        const newUser = {
+          email: currentUser.email,
+          role: "student",
+          Name: currentUser.displayName,
+          image: currentUser.photoURL,
+        };
+        myAxios
+          .post("/users", newUser)
+          .then((res) => {
+            if (res.data.exits) {
+              toast.success(`Welcome Back ${currentUser.displayName} !`);
+              navigate("/");
+            } else {
+              toast.success(`Welcome  ${currentUser.displayName}`);
+              navigate("/");
+            }
+          })
+          .catch((err) => toast.error(err.message));
+        setLoading(false);
       })
       .catch((err) => {
         toast.error(err.message);
@@ -161,6 +197,19 @@ const Register = () => {
               </Link>{" "}
             </p>
           </form>
+          <button
+            disabled={loading}
+            className="btn normal-case"
+            onClick={handleGoogleIn}>
+            {loading ? (
+              <ImSpinner6 />
+            ) : (
+              <>
+                <FcGoogle className="text-2xl" />
+                Google In
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

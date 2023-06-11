@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ImSpinner6 } from "react-icons/im";
 import { useLocation, useNavigate } from "react-router-dom";
-import { myAxios } from "../../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useGetContext from "../../../Hooks/useGetContext";
 const UpdateCLass = () => {
   const { state } = useLocation();
@@ -34,6 +34,7 @@ const UpdateCLass = () => {
   const onSubmit = (data) => {
     const { availableSets, imageUrl, price, name } = data;
     setAddLoading(true);
+    const [axiosSecure] = useAxiosSecure();
     //
     const newClass = {
       name,
@@ -47,7 +48,7 @@ const UpdateCLass = () => {
     };
     // console.log(newClass);
     // insert a class
-    myAxios
+    axiosSecure
       .patch(`/classesInstructor/${_id}`, newClass)
       .then((res) => {
         // console.log(res.data);

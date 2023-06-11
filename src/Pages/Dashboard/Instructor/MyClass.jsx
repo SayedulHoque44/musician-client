@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { myAxios } from "../../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useGetClasses from "../../../Hooks/useGetClasses";
 import useGetContext from "../../../Hooks/useGetContext";
 
@@ -9,6 +9,7 @@ const MyClass = () => {
   const { user, loading } = useGetContext();
   const [classes, refetch, isClassesLoading] = useGetClasses(user?.email);
   const navigate = useNavigate();
+  const [axiosSecure] = useAxiosSecure();
   // console.log(classes);
 
   //
@@ -38,7 +39,7 @@ const MyClass = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         //
-        myAxios.delete(`/classesInstructor/${item._id}`).then((res) => {
+        axiosSecure.delete(`/classesInstructor/${item._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             Swal.fire("Deleted!", "Your file has been deleted.", "success");
             refetch();

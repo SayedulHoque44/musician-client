@@ -8,12 +8,15 @@ import {
   signOut,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { app } from "../Firebase/Firebase.config";
+import { myAxios } from "../Hooks/useAxiosSecure";
 
 export const musicianContext = createContext(null);
 const ContextProvider = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const [loading, setLoading] = useState(true);
+  const [tokenLoading, setTokenLoading] = useState(true);
   const [user, setUser] = useState(null);
   const auth = getAuth(app);
   const Googleprovider = new GoogleAuthProvider();
@@ -49,7 +52,16 @@ const ContextProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
       if (currentUser) {
-        // TODO: JWT & Role Cheak
+        myAxios
+          .post("/jwt", { email: currentUser.email })
+          .then((res) => {
+            localStorage.setItem("access-token", res.data.token);
+            setTokenLoading(false);
+          })
+          .catch((err) => toast(err.message));
+      } else {
+        localStorage.removeItem("access-token");
+        setTokenLoading(true);
       }
     });
 
@@ -67,6 +79,7 @@ const ContextProvider = ({ children }) => {
     loading,
     setLoading,
     user,
+    tokenLoading,
   };
 
   return (

@@ -2,17 +2,15 @@ import React, { useRef } from "react";
 import { toast } from "react-hot-toast";
 import { MdCancelScheduleSend, MdOutlineDoneAll } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { myAxios } from "../../../Hooks/useAxiosSecure";
+import useAxiosSecure, { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetClasses from "../../../Hooks/useGetClasses";
 
 const ManageClasses = () => {
   const [classes, refetch, isClassesLoading] = useGetClasses();
   const feedRef = useRef(null);
   const navigate = useNavigate();
+  const [axiosSecure] = useAxiosSecure();
 
-  //
-
-  // console.log(classes);
   const getStatusColor = (status) => {
     if (status === "pending") {
       return " bg-violet-600";

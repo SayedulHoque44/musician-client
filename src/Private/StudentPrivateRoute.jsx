@@ -7,7 +7,7 @@ const StudentPrivateRoute = ({ children }) => {
   const { user, loading } = useGetContext();
   const [userRole, userRoleoading] = useUserRole();
 
-  console.log(userRole);
+  // console.log(userRole);
   if (loading || userRoleoading) {
     return (
       <>

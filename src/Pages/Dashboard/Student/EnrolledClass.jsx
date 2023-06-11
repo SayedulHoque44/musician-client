@@ -5,7 +5,7 @@ import usePaidClasses from "../../../Hooks/usePaidClasses";
 const EnrolledClass = () => {
   const { user } = useGetContext();
   const [Paidclasses, refetch, isClassLoading] = usePaidClasses(user?.email);
-  console.log(Paidclasses);
+  // console.log(Paidclasses);
 
   return (
     <div>

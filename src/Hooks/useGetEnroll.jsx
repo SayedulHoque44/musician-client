@@ -1,18 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
-import { myAxios } from "./useAxiosSecure";
+import useAxiosSecure from "./useAxiosSecure";
 import useGetContext from "./useGetContext";
 
 const useGetEnroll = (email) => {
-  const { loading } = useGetContext();
+  const { loading, tokenLoading } = useGetContext();
+  const [axiosSecure] = useAxiosSecure();
   const {
     data: enrolledClasses = [],
     isLoading,
     refetch,
   } = useQuery({
     queryKey: ["enrolled"],
-    enabled: !loading,
+    enabled: !loading && !tokenLoading,
     queryFn: async () => {
-      const response = await myAxios.get(`/enroll/${email}`);
+      const response = await axiosSecure.get(`/enroll/${email}`);
 
       //   console.log(response);
       return response.data;

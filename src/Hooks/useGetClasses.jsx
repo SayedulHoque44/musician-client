@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { myAxios } from "./useAxiosSecure";
+import useAxiosSecure, { myAxios } from "./useAxiosSecure";
 import useGetContext from "./useGetContext";
 
 const useGetClasses = (email, status) => {
-  const { user, loading } = useGetContext();
-
+  const { user, loading, tokenLoading } = useGetContext();
+  const [axiosSecure] = useAxiosSecure();
   //
   const {
     data: classes = [],
@@ -15,14 +15,14 @@ const useGetClasses = (email, status) => {
     enabled: !loading,
     queryFn: async () => {
       if (email) {
-        const response = await myAxios.get(`/classes/${email}`);
+        const response = await axiosSecure.get(`/classes/${email}`);
         return response.data;
       } else if (status) {
         const response = await myAxios.get(`/StatusClasses/${status}`);
 
         return response.data;
       } else {
-        const response = await myAxios.get("/AllClasses");
+        const response = await axiosSecure.get("/AllClasses");
         return response.data;
       }
     },

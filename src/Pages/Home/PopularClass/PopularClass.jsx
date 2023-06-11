@@ -24,7 +24,7 @@ const PopularClass = () => {
   //
   //   console.log(popularClass);
   return (
-    <div className="py-20" data-theme="dark">
+    <div className="py-20">
       <h1 className="my-3 text-4xl text-center"> Our Popular Class</h1>
       <div className="py-20">
         <Swiper

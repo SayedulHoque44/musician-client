@@ -15,7 +15,7 @@ const ClassCard = ({ card }) => {
   const [loading, setLoading] = useState(false);
   const [enrolledClasses, isLoading, refetch] = useGetEnroll(user?.email);
   const [Paidclasses, , isPaidLoading] = usePaidClasses(user?.email);
-  // console.log(Paidclasses);
+  // console.log(enrolledClasses);
   const {
     availableSets,
     enrolled,

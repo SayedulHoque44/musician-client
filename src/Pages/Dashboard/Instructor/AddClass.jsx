@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { ImSpinner6 } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
-import { myAxios } from "../../../Hooks/useAxiosSecure";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useGetContext from "../../../Hooks/useGetContext";
 
 const AddClass = () => {
   const { loading, user } = useGetContext();
   const navigate = useNavigate();
   const [addLoading, setAddLoading] = useState(false);
+  const [axiosSecure] = useAxiosSecure();
   const {
     register,
     handleSubmit,
@@ -36,7 +37,7 @@ const AddClass = () => {
     };
 
     // insert a class
-    myAxios
+    axiosSecure
       .post("/classes", newClass)
       .then((res) => {
         console.log(res.data);

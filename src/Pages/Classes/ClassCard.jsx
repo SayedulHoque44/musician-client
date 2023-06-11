@@ -81,7 +81,10 @@ const ClassCard = ({ card }) => {
     }
   };
   return (
-    <div className="card card-side bg-base-100 shadow-xl">
+    <div
+      className={`card card-side ${
+        availableSets === 0 ? "bg-red-400" : "bg-base-100"
+      } shadow-xl `}>
       <figure className="w-1/2">
         <img src={imageUrl} alt="Movie" />
       </figure>
@@ -112,9 +115,7 @@ const ClassCard = ({ card }) => {
             <button
               className="btn btn-primary"
               disabled={
-                enrolled < availableSets && userRole === "student"
-                  ? false
-                  : true
+                availableSets !== 0 && userRole === "student" ? false : true
               }
               onClick={handleEnroll}>
               Select

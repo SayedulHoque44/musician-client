@@ -7,7 +7,7 @@ const Container = ({ children }) => {
     document.querySelector("html").setAttribute("data-theme", theme);
   }, [theme]);
   return (
-    <div className="max-w-[2530px] mx-auto lg:px-20 md:px-10 sm:px-5 px">
+    <div className="max-w-[2530px] mx-auto lg:px-20 md:px-10 sm:px-5 px overflow-hidden">
       {children}
     </div>
   );

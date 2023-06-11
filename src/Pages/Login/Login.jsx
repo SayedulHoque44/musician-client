@@ -75,7 +75,7 @@ const Login = () => {
           <img src={loginImg} alt="" />
         </div>
         <div className="card flex-shrink-0  max-w-sm shadow-2xl bg-base-100 w-1/2 lg:mr-10">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>

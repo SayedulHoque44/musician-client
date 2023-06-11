@@ -1,12 +1,10 @@
 import React, { useRef } from "react";
 import { toast } from "react-hot-toast";
+import { MdCancelScheduleSend, MdOutlineDoneAll } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { myAxios } from "../../../Hooks/useAxiosSecure";
 import useGetClasses from "../../../Hooks/useGetClasses";
 
-export const remainSets = (sets, enrolled) => {
-  return sets - enrolled;
-};
 const ManageClasses = () => {
   const [classes, refetch, isClassesLoading] = useGetClasses();
   const feedRef = useRef(null);
@@ -87,7 +85,7 @@ const ManageClasses = () => {
                     {item.instructorEmail}
                   </span>
                 </td>
-                <td> {remainSets(item.availableSets, item.enrolled)}</td>
+                <td> {item.enrolled}</td>
                 <td className="text-right">${item.price}</td>
                 <td>
                   {" "}
@@ -98,21 +96,23 @@ const ManageClasses = () => {
                     {item.status}
                   </span>{" "}
                 </td>
-                <td>
-                  {item.status === "pending" && (
-                    <>
-                      <button
-                        onClick={() => handleApprove(item)}
-                        className="btn btn-success btn-sm mr-3">
-                        Approve
-                      </button>
-                      <button
-                        onClick={() => handleDeny(item)}
-                        className="btn btn-error btn-sm">
-                        Deny
-                      </button>
-                    </>
-                  )}
+                <td className="flex gap-2">
+                  <button
+                    title="Approve"
+                    disabled={item.status === "approved"}
+                    onClick={() => handleApprove(item)}
+                    className="btn btn-success btn-sm mr-3">
+                    <MdOutlineDoneAll />
+                  </button>
+                  <button
+                    title="Deny"
+                    disabled={
+                      item.status === "deny" || item.status === "approved"
+                    }
+                    onClick={() => handleDeny(item)}
+                    className="btn btn-error btn-sm">
+                    <MdCancelScheduleSend />
+                  </button>
                 </td>
               </tr>
             ))}

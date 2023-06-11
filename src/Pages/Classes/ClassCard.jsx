@@ -38,7 +38,7 @@ const ClassCard = ({ card }) => {
       proccesClass = false;
     }
   }
-  console.log(proccesClass);
+  // console.log(proccesClass);
   //
   const handleEnroll = () => {
     setLoading(true);

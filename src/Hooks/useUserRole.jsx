@@ -6,7 +6,7 @@ const useUserRole = () => {
   const { user, loading } = useGetContext();
   const { data: userRole = [], isLoading: userRoleoading } = useQuery({
     queryKey: ["users"],
-    // enabled: !loading && user?.email ? true : false,
+    enabled: !loading && user?.email ? true : false,
     queryFn: async () => {
       // TODO:Token
       const response = await myAxios.get(`/usersRole/${user?.email}`);

@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { CiDark, CiLight } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import useGetContext from "../../../Hooks/useGetContext";
-
+import logo from "../../../assets/icon/undraw_compose_music_re_wpiw.svg";
 const Navbar = () => {
   const { theme, toggleTheme, user, logout, loading } = useGetContext();
 
@@ -60,7 +60,10 @@ const Navbar = () => {
               {navItems}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">Musician</a>
+          <Link to={"/"} className="btn btn-ghost normal-case text-xl">
+            {" "}
+            <img className="h-full" src={logo} alt="" /> Musician
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItems}</ul>

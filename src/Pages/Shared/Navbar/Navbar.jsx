@@ -1,7 +1,7 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 import { CiDark, CiLight } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useGetContext from "../../../Hooks/useGetContext";
 import logo from "../../../assets/icon/undraw_compose_music_re_wpiw.svg";
 const Navbar = () => {
@@ -11,17 +11,17 @@ const Navbar = () => {
   const navItems = (
     <>
       <li>
-        <Link to={`/`}>Home</Link>
+        <NavLink to={`/`}>Home</NavLink>
       </li>
       <li>
-        <Link to={`instructors`}>Instructors</Link>
+        <NavLink to={`instructors`}>Instructors</NavLink>
       </li>
       <li>
-        <Link to={`classes`}>Classes</Link>
+        <NavLink to={`classes`}>Classes</NavLink>
       </li>
       {user && (
         <li>
-          <Link to={`/dashboard`}>Dashboard</Link>
+          <NavLink to={`/dashboard`}>Dashboard</NavLink>
         </li>
       )}
     </>
@@ -55,8 +55,9 @@ const Navbar = () => {
               </svg>
             </label>
             <ul
+              id="navItem"
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 ">
               {navItems}
             </ul>
           </div>

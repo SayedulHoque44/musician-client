@@ -1,4 +1,4 @@
-# [Musician]() - Live Link
+# [Musician](https://musician-client.web.app/instructors) - Live Link
 
 ## Website Feature
 

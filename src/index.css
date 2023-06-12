@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#navItem li a.active {
+  background-color: rgb(4, 132, 89);
+}
+#navItem li a {
+  background-color: red;
+}

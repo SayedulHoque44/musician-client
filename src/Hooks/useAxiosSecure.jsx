@@ -3,11 +3,11 @@ import { useEffect } from "react";
 
 //
 export const myAxios = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://musicians-server-sayedulhoque44.vercel.app/",
 });
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "https://musicians-server-sayedulhoque44.vercel.app/",
 });
 
 const useAxiosSecure = () => {

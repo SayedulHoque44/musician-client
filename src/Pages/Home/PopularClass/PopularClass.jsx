@@ -8,6 +8,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 // import required modules
 import { useQuery } from "@tanstack/react-query";
+import { Slide } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 import { EffectCoverflow, Pagination } from "swiper";
 import { myAxios } from "../../../Hooks/useAxiosSecure";
@@ -25,56 +26,61 @@ const PopularClass = () => {
   //   console.log(popularClass);
   return (
     <div className="py-20">
-      <h1 className="my-3 text-4xl text-center"> Our Popular Class</h1>
-      <div className="py-20">
-        <Swiper
-          effect={"coverflow"}
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView={3}
-          coverflowEffect={{
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          pagination={true}
-          modules={[EffectCoverflow, Pagination]}
-          className="mySwiper">
-          {popularClass.slice(0, 6).map((item) => (
-            <SwiperSlide key={item._id}>
-              <div className="card w-full bg-base-100 shadow-xl">
-                <figure>
-                  <img
-                    className="h-[200px] w-full object-cover"
-                    src={item.imageUrl}
-                    alt="img"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">
-                    {item.name}
-                    <div className="badge badge-secondary">Popular</div>
-                  </h2>
-                  <p className="font-semibold">Enrolled : {item.enrolled} </p>
-                  <p></p>
-                  <p>Instructor Name : {item.instructorName}</p>
-                  <Link to={"/classes"} className="btn bg-violet-600 mb-3">
-                    See more
-                  </Link>
-                  <div className="card-actions justify-end">
-                    <div className="badge badge-outline">rating: 4.5</div>
-                    <div className="badge badge-outline">
-                      Price : {item.price}
+      <h1 className="my-3 text-4xl text-center animate__animated animate__tada">
+        {" "}
+        Our Popular Class
+      </h1>
+      <Slide direction="up" triggerOnce>
+        <div className="py-20 animate__animated animate__bounceInUp">
+          <Swiper
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={3}
+            coverflowEffect={{
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            pagination={true}
+            modules={[EffectCoverflow, Pagination]}
+            className="mySwiper">
+            {popularClass.slice(0, 6).map((item) => (
+              <SwiperSlide key={item._id}>
+                <div className="card w-full bg-base-100 shadow-xl">
+                  <figure>
+                    <img
+                      className="h-[200px] w-full object-cover"
+                      src={item.imageUrl}
+                      alt="img"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">
+                      {item.name}
+                      <div className="badge badge-secondary">Popular</div>
+                    </h2>
+                    <p className="font-semibold">Enrolled : {item.enrolled} </p>
+                    <p></p>
+                    <p>Instructor Name : {item.instructorName}</p>
+                    <Link to={"/classes"} className="btn bg-violet-600 mb-3">
+                      See more
+                    </Link>
+                    <div className="card-actions justify-end">
+                      <div className="badge badge-outline">rating: 4.5</div>
+                      <div className="badge badge-outline">
+                        Price : {item.price}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </Slide>
     </div>
   );
 };

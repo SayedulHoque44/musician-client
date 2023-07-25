@@ -3,11 +3,11 @@ import React from "react";
 const InsTructorCard = ({ card }) => {
   const { Name, image, email, role, _id } = card;
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card w-full bg-base-100 shadow-xl mx-auto">
       <figure>
-        <img src={image} alt="user" />
+        <img src={image} className="h-[200px] object-cover" alt="user" />
       </figure>
-      <div className="card-body items-center ">
+      <div className="card-body ">
         <h2 className="card-title">{Name}</h2>
         <p>Email : {email}</p>
         <div className="card-actions justify-end">

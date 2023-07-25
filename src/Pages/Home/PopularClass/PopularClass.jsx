@@ -1,5 +1,6 @@
 import React from "react";
 // Import Swiper React components
+import "@smastrom/react-rating/style.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -7,6 +8,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 // import required modules
+import { Rating } from "@smastrom/react-rating";
 import { useQuery } from "@tanstack/react-query";
 import { Slide } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
@@ -36,13 +38,33 @@ const PopularClass = () => {
             effect={"coverflow"}
             grabCursor={true}
             centeredSlides={true}
-            slidesPerView={3}
+            // slidesPerView={3}
             coverflowEffect={{
               rotate: 50,
               stretch: 0,
               depth: 100,
               modifier: 1,
               slideShadows: true,
+            }}
+            //
+            // responsive
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              830: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              1024: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              1424: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
             }}
             pagination={true}
             modules={[EffectCoverflow, Pagination]}
@@ -52,26 +74,30 @@ const PopularClass = () => {
                 <div className="card w-full bg-base-100 shadow-xl">
                   <figure>
                     <img
-                      className="h-[200px] w-full object-cover"
+                      className="h-[355px] w-full object-cover"
                       src={item.imageUrl}
                       alt="img"
                     />
                   </figure>
                   <div className="card-body">
-                    <h2 className="card-title">
+                    <h2 className="card-title text-2xl">
                       {item.name}
                       <div className="badge badge-secondary">Popular</div>
                     </h2>
-                    <p className="font-semibold">Enrolled : {item.enrolled} </p>
-                    <p></p>
-                    <p>Instructor Name : {item.instructorName}</p>
+
+                    <p className="text-gray-500"> {item.instructorName}</p>
+                    <p className="font-semibold text-warning">
+                      Enrolled : {item.enrolled}{" "}
+                    </p>
                     <Link to={"/classes"} className="btn bg-violet-600 mb-3">
                       See more
                     </Link>
-                    <div className="card-actions justify-end">
-                      <div className="badge badge-outline">rating: 4.5</div>
-                      <div className="badge badge-outline">
-                        Price : {item.price}
+                    <div className="flex justify-between ">
+                      <p className="text-[#7c3aed] font-semibold text-xl">
+                        $ {item.price}
+                      </p>
+                      <div className="flex">
+                        {<Rating style={{ maxWidth: 95 }} value={3} readOnly />}
                       </div>
                     </div>
                   </div>

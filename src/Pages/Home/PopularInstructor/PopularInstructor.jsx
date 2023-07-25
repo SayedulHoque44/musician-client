@@ -40,11 +40,11 @@ const PopularInstructor = () => {
             }}
             pagination={true}
             modules={[EffectCube, Pagination]}
-            className="mySwiper w-1/2">
+            className="mySwiper md:w-1/2 w-[80%]">
             {pupularInstructor.slice(0, 6).map((item) => (
               <SwiperSlide key={item._id}>
                 <div className="card card-compact w-full bg-base-100 shadow-xl">
-                  <figure className="h-[400px]">
+                  <figure className=" md:h-[400px] h-[300px]">
                     <img
                       className="w-full object-cover"
                       src={item.image}

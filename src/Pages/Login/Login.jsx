@@ -73,12 +73,12 @@ const Login = () => {
   };
   return (
     <div className="hero min-h-screen bg-base-200 w-full">
-      <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="hero-content flex-col lg:flex-row-reverse w-full">
         <div className="text-center lg:text-left w-1/2">
           <h1 className="text-5xl font-bold">Login now!</h1>
-          <img src={loginImg} alt="" />
+          <img className="md:block hidden" src={loginImg} alt="" />
         </div>
-        <div className="card flex-shrink-0  max-w-sm shadow-2xl bg-base-100 w-1/2 lg:mr-10">
+        <div className="card flex-shrink-0  md:max-w-sm shadow-2xl bg-base-100 w-full lg:mr-10">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">
             <div className="form-control">
               <label className="label">
@@ -88,7 +88,7 @@ const Login = () => {
                 type="text"
                 placeholder="email"
                 required
-                className="input input-bordered"
+                className="input input-bordered w-full"
                 {...register("email")}
               />
             </div>

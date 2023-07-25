@@ -104,7 +104,7 @@ const Register = () => {
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left w-1/2">
           <h1 className="text-5xl font-bold">Register now!</h1>
-          <img src={registerImg} alt="" />
+          <img className="md:block hidden" src={registerImg} alt="" />
         </div>
         <div className="card flex-shrink-0 max-w-sm shadow-2xl bg-base-100 w-1/2 lg:mr-10">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">

@@ -14,7 +14,7 @@ const Instructors = () => {
   return (
     <div>
       <h1 className="uppercase text-3xl text-center">Instructors</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 py-10 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 py-10 gap-4">
         {instructor.map((card) => (
           <InsTructorCard key={card._id} card={card} />
         ))}

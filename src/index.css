@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 #navItem li a.active {
-  background-color: rgb(4, 132, 89);
+  color: #890393;
+  font-weight: 700;
 }
-#navItem li a {
+/* #navItem li a {
   background-color: red;
-}
+} */

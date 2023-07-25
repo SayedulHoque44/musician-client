@@ -31,22 +31,22 @@ const Bannar = () => {
         dynamicBullets: true,
       }}
       //
-      autoplay={{
-        delay: 5000,
-        disableOnInteraction: false,
-      }}
+      // autoplay={{
+      //   delay: 5000,
+      //   disableOnInteraction: false,
+      // }}
       modules={[Pagination, Navigation, Autoplay]}
       className="mySwiper">
       <SwiperSlide>
-        <div className="min-h-screen flex overflow-hidden">
+        <div className="min-h-screen md:max-h-screen flex overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 w-full items-center">
-            <div className="space-y-5 animate__animated animate__fadeInLeftBig">
-              <h1 className="text-6xl mr-48">
+            <div className="pt-8 space-y-5 animate__animated animate__fadeInLeftBig px-5 md:pt-0">
+              <h1 className="md:text-6xl text-2xl md:mr-48">
                 <Typewriter
                   loop={0}
                   cursor
-                  cursorStyle="..|"
-                  typeSpeed={70}
+                  cursorStyle="|"
+                  typeSpeed={50}
                   deleteSpeed={50}
                   delaySpeed={1000}
                   cursorColor="#7c3aed"
@@ -54,7 +54,7 @@ const Bannar = () => {
                 />
               </h1>
 
-              <p>
+              <p className="text-xs md:text-[17px] tracking-wide leading-6 ">
                 Music has the power to unleash the hidden melodies within every
                 individual. Explore the world of music and discover your true
                 potential. Our comprehensive learning programs cater to all
@@ -74,22 +74,22 @@ const Bannar = () => {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="min-h-screen flex overflow-hidden">
+        <div className="min-h-screen md:max-h-screen flex overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 w-full items-center">
-            <div className="space-y-5 animate__animated animate__fadeInLeftBig">
-              <h1 className="text-6xl mr-48">
+            <div className="pt-8 space-y-5 animate__animated animate__fadeInLeftBig px-5 md:pt-0">
+              <h1 className="md:text-6xl text-2xl md:mr-48">
                 <Typewriter
                   loop={0}
                   cursor
-                  cursorStyle="..|"
-                  typeSpeed={70}
+                  cursorStyle="|"
+                  typeSpeed={50}
                   deleteSpeed={50}
                   delaySpeed={1000}
                   cursorColor="#7c3aed"
                   words={["Embark on a Harmonious Adventure"]}
                 />
               </h1>
-              <p>
+              <p className="text-xs md:text-[17px] tracking-wide leading-6">
                 Dive into the enchanting realm of music and embark on a
                 harmonious adventure. Learn to play various instruments, from
                 classics like the piano and guitar to unique instruments from
@@ -110,22 +110,22 @@ const Bannar = () => {
         </div>
       </SwiperSlide>
       <SwiperSlide>
-        <div className="min-h-screen flex overflow-hidden">
+        <div className="min-h-screen md:max-h-screen flex overflow-hidden">
           <div className="grid grid-cols-1 sm:grid-cols-2 w-full items-center">
-            <div className="space-y-5 animate__animated animate__fadeInLeftBig">
-              <h1 className="text-6xl mr-48">
+            <div className="pt-8 space-y-5 animate__animated animate__fadeInLeftBig px-5 md:pt-0">
+              <h1 className="md:text-6xl text-2xl md:mr-48">
                 <Typewriter
                   loop={0}
                   cursor
-                  cursorStyle="..|"
-                  typeSpeed={70}
+                  cursorStyle="|"
+                  typeSpeed={50}
                   deleteSpeed={50}
                   delaySpeed={1000}
                   cursorColor="#7c3aed"
                   words={["Unleash Your Creativity"]}
                 />
               </h1>
-              <p>
+              <p className="text-xs md:text-[17px] tracking-wide leading-6">
                 Music is a canvas where you can paint your emotions, thoughts,
                 and stories. Unleash your creativity and learn the art of
                 songwriting and composition. Develop your unique musical voice

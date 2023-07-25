@@ -82,21 +82,23 @@ const ClassCard = ({ card }) => {
   };
   return (
     <div
-      className={`card card-side ${
+      className={`card w-full bg-base-100 relative  ${
         availableSets === 0 ? "bg-red-400" : "bg-base-100"
       } shadow-xl `}>
-      <figure className="w-1/2">
-        <img src={imageUrl} alt="Movie" />
+      <figure>
+        <img
+          className="h-[355px] w-full object-cover"
+          src={imageUrl}
+          alt="Movie"
+        />
       </figure>
-      <div className="card-body relative">
-        <div className="badge badge-secondary absolute top-0 right-0">
+      <div className="card-body ">
+        <div className="badge text-lg font-semibold badge-secondary absolute top-0 right-0">
           ${price}
         </div>
         <h2 className="card-title">{name}</h2>
-        <p>
-          <span className="font-semibold">Instructor : </span> <br />
+        <p className="text-gray-500">
           {instructorName} <br />
-          {instructorEmail}
         </p>
         {/* Ata tkn kombe jkn payment krbe */}
 
@@ -109,27 +111,27 @@ const ClassCard = ({ card }) => {
         </p>
         <div className="card-actions justify-end">
           {proccesClass === "selected" && (
-            <button className="btn btn-primary" disabled>
+            <button className="btn btn-primary w-full" disabled>
               Selected
             </button>
           )}
           {proccesClass === "paid" && (
-            <button className="btn bg-violet-600 disabled">Enrolled</button>
+            <button className="btn bg-violet-600 disabled w-full">
+              Enrolled
+            </button>
           )}
           {proccesClass === false && (
             <button
-              className="btn btn-primary"
+              className="btn btn-primary w-full"
               disabled={
-                availableSets !== 0 && userRole === "student" ? false : true
+                (availableSets !== 0 && userRole !== "admin") ||
+                userRole !== "instructor"
+                  ? false
+                  : true
               }
               onClick={handleEnroll}>
               Select
             </button>
-          )}
-          {!user && (
-            <p className="text-xs text-error text-right">
-              To Select You Have To Login First !
-            </p>
           )}
         </div>
       </div>

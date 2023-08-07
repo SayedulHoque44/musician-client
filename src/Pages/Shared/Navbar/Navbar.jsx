@@ -1,18 +1,32 @@
 import React from "react";
 import { toast } from "react-hot-toast";
 import { CiDark, CiLight } from "react-icons/ci";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import useGetContext from "../../../Hooks/useGetContext";
 import logo from "../../../assets/icon/undraw_compose_music_re_wpiw.svg";
 const Navbar = () => {
   const { theme, toggleTheme, user, logout, loading } = useGetContext();
-
+  const location = useLocation();
+  const path = location.pathname;
   //
   const navItems = (
     <>
       <li>
         <NavLink to={`/`}>Home</NavLink>
       </li>
+      {path === "/" && (
+        <>
+          <li>
+            <a href="#popularClass">Popular Class</a>
+          </li>
+          <li>
+            <a href="#popularInstructor">Popular Instructor</a>
+          </li>
+          <li>
+            <a href="#offer">Offer</a>
+          </li>
+        </>
+      )}
       <li>
         <NavLink to={`instructors`}>Instructors</NavLink>
       </li>
@@ -61,7 +75,9 @@ const Navbar = () => {
               {navItems}
             </ul>
           </div>
-          <Link to={"/"} className="btn btn-ghost normal-case text-xl">
+          <Link
+            to={"/"}
+            className="btn btn-ghost normal-case md:text-xl text-sm">
             {" "}
             <img className="h-full" src={logo} alt="" /> Musician
           </Link>
@@ -72,13 +88,17 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn mr-5" onClick={toggleTheme}>
+          <a
+            className="btn md:btn-md md:mr-5 btn-sm md:text-sm text-xs"
+            onClick={toggleTheme}>
             {theme == "light" ? "dark" : "light"}
             {theme == "light" ? <CiDark /> : <CiLight />}
           </a>
           {user ? (
             <>
-              <button className="btn btn-error" onClick={hangleLogout}>
+              <button
+                className=" btn-error btn md:btn-md mr-5 btn-sm md:text-sm text-xs"
+                onClick={hangleLogout}>
                 {" "}
                 Logout
               </button>
@@ -96,7 +116,9 @@ const Navbar = () => {
               </label>
             </>
           ) : (
-            <Link className="btn" to={`login`}>
+            <Link
+              className="btn md:btn-md mr-5 btn-sm md:text-sm text-xs"
+              to={`login`}>
               {" "}
               login
             </Link>

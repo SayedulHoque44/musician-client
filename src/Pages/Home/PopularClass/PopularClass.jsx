@@ -27,7 +27,7 @@ const PopularClass = () => {
   //
   //   console.log(popularClass);
   return (
-    <div className="py-20">
+    <div className="py-20" id="popularClass">
       <h1 className="my-3 text-4xl text-center animate__animated animate__tada">
         {" "}
         Our Popular Class

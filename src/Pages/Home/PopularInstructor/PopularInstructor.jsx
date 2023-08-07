@@ -25,7 +25,7 @@ const PopularInstructor = () => {
   //
   //   console.log(pupularInstructor);
   return (
-    <div className="py-20 overflow-hidden">
+    <div className="py-20 overflow-hidden" id="popularInstructor">
       <h1 className="my-3 text-4xl text-center"> Our Popular Instructor</h1>
       <Slide direction="up" triggerOnce>
         <div className="py-20 ">

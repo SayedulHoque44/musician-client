@@ -88,16 +88,14 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a
-            className="btn md:btn-md md:mr-5 btn-sm md:text-sm text-xs"
-            onClick={toggleTheme}>
+          <button className="btn btn-sm text-xs mr-2" onClick={toggleTheme}>
             {theme == "light" ? "dark" : "light"}
             {theme == "light" ? <CiDark /> : <CiLight />}
-          </a>
+          </button>
           {user ? (
             <>
               <button
-                className=" btn-error btn md:btn-md mr-5 btn-sm md:text-sm text-xs"
+                className=" btn-error btn btn-sm text-xs"
                 onClick={hangleLogout}>
                 {" "}
                 Logout
@@ -116,9 +114,7 @@ const Navbar = () => {
               </label>
             </>
           ) : (
-            <Link
-              className="btn md:btn-md mr-5 btn-sm md:text-sm text-xs"
-              to={`login`}>
+            <Link className="btn btn-sm text-xs" to={`login`}>
               {" "}
               login
             </Link>

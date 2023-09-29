@@ -16,6 +16,18 @@ import "swiper/css/pagination";
 import { Typewriter } from "react-simple-typewriter";
 import { Autoplay, Navigation, Pagination } from "swiper";
 const Bannar = () => {
+  const pagination = {
+    clickable: true,
+    renderBullet: function (index, className) {
+      return (
+        '<span class="' +
+        className +
+        ' text-[#7c3aed] ">' +
+        (index + 1) +
+        "</span>"
+      );
+    },
+  };
   return (
     <Swiper
       // for navigation arrow
@@ -27,14 +39,12 @@ const Bannar = () => {
       // cursor pointer
       grabCursor={true}
       // pagination
-      pagination={{
-        dynamicBullets: true,
-      }}
+      pagination={pagination}
       //
-      // autoplay={{
-      //   delay: 5000,
-      //   disableOnInteraction: false,
-      // }}
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
       modules={[Pagination, Navigation, Autoplay]}
       className="mySwiper">
       <SwiperSlide>
@@ -63,9 +73,9 @@ const Bannar = () => {
               <button className="btn ">Explore</button>
             </div>
 
-            <div>
+            <div className="flex items-center justify-center">
               <img
-                className="w-full animate__animated animate__fadeInRightBig"
+                className="h-80  animate__animated animate__fadeInRightBig"
                 src={slideimg1}
                 alt=""
               />
@@ -99,9 +109,9 @@ const Bannar = () => {
               <button className="btn">Explore</button>
             </div>
 
-            <div>
+            <div className="flex items-center justify-center">
               <img
-                className="w-full animate__animated animate__fadeInRightBig"
+                className="h-80 animate__animated animate__fadeInRightBig"
                 src={slideimg2}
                 alt=""
               />
@@ -133,9 +143,9 @@ const Bannar = () => {
               </p>
               <button className="btn">Explore</button>
             </div>
-            <div>
+            <div className="flex items-center justify-center">
               <img
-                className="w-full animate__animated animate__fadeInRightBig"
+                className="h-80 animate__animated animate__fadeInRightBig"
                 src={slideimg3}
                 alt=""
               />
